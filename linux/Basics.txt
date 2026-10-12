@@ -4,6 +4,10 @@
 4. find -name "example.txt" - finds file with specified name 
 5. grep "password" passwords.txt - finds text inside a file
 6. ls - helps to look up what is inside current folder
+options for ls:
+1) -a shows all hidden files
+P.S. You can wright 'comand' --help and it will show all posible options and instructions 
+
 7. & - runs a command in a back ground while you can run other commands 
 8. && - runs bot commands one by one like a domino 
 9. > - 	Used to redirect output. We can take the output of a command and send it to a file. This operator will overwrite anything that exists in the file.
