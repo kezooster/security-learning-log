@@ -6,9 +6,15 @@
 6. ls - helps to look up what is inside current folder
 options for ls:
 1) -a shows all hidden files
-P.S. You can wright 'comand' --help and it will show all posible options and instructions 
-
-7. & - runs a command in a back ground while you can run other commands 
-8. && - runs bot commands one by one like a domino 
-9. > - 	Used to redirect output. We can take the output of a command and send it to a file. This operator will overwrite anything that exists in the file.
-10. >> - This redirector does the same thing, but instead of overwriting, it will just add the output to the bottom of the file.
+P.S. You can wright 'ls --help' and it will show all posible options and instructions while MAN(ual) 'man ls' gives description of what command dose
+7. touch "name.txt" - creates file
+8. mkdir "folder_name" - creates folder
+9. rm "file.txt" - removes file
+10. cp 'file_name" "path" - copies the file where you want 
+options for rm:
+1) you can use -R option to delte recursively that means the entire tree will be deleted 
+operators:
+1) & - runs a command in a back ground while you can run other commands 
+2) && - runs bot commands one by one like a domino 
+3) > - 	Used to redirect output. We can take the output of a command and send it to a file. This operator will overwrite anything that exists in the file.
+4) >> - This redirector does the same thing, but instead of overwriting, it will just add the output to the bottom of the file.
