@@ -1,0 +1,10 @@
+1. pwd - your location
+2. cat - read a file
+3. cd - move through the directories 
+4. find -name "example.txt" - finds file with specified name 
+5. grep "password" passwords.txt - finds text inside a file
+6. ls - helps to look up what is inside current folder
+7. & - runs a command in a back ground while you can run other commands 
+8. && - runs bot commands one by one like a domino 
+9. > - 	Used to redirect output. We can take the output of a command and send it to a file. This operator will overwrite anything that exists in the file.
+10. >> - This redirector does the same thing, but instead of overwriting, it will just add the output to the bottom of the file.
