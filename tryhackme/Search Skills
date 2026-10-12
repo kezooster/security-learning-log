@@ -1,0 +1,7 @@
+Shodan.io - It is a search engine for devices connected to the Internet. Where you can use filters like:
+hostname:fake.io
+org:AS7224 - Scope results in a named organisation or ASN Identifier (Who owns a range of IP addresses)
+port:80
+country:AZ
+
+VirusTotal - Website that combience over 70 anti-virus engine all you need is to enter file or url to check if it contains viruses 
