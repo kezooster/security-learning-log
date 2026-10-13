@@ -18,3 +18,35 @@ operators:
 2) && - runs bot commands one by one like a domino 
 3) > - 	Used to redirect output. We can take the output of a command and send it to a file. This operator will overwrite anything that exists in the file.
 4) >> - This redirector does the same thing, but instead of overwriting, it will just add the output to the bottom of the file.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+some of the file will have restricted access to check it type ls -l
+
+-rwx rw- r-- 
+
+r-- stands for all users
+rw- stands for group owner of the file
+rwx - permision for the file owner of the file
+
+to change user u need to use commands su (substitute user) commands should look like this:
+su -l "name of the user we want to swtitch to" "password" (root dosent need password) 
+
+why we have used -l? 
+because -l stands for log in into the user fully if we would wright juts su with out options you will stay in the old envirment in the same path 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
