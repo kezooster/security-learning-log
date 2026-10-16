@@ -34,12 +34,25 @@ operators:
     5)status
 15. top - shows your process in realtime
 16. wget - download smth from a wweb site for example: "wget https://assets.tryhackme.com/additional/linux-fundamentals/part3/myfile.txt"
-  
+  also we can run a python server and download smth from there example:
+    1)"python3 -m http.server" 
+    2)"wget http://[MACHINE-IP]:8000/[filename]"
 17. scp - allows you to copy files from others computer by ssh connection and download files to connected pc 
   commands: 
-    1)for copying files to remote pc: scp [filename] [username@ip:] [file-path]
+    1)for copying files to remote pc: scp [filename] [username@ip]:[file-path]
     2)for copying files from remote pc: scp [username@ip:] [file-path] [copied-file-name] 
-18. 
+18. crontab - helps us boot smth after pc just started its work (in the processes look like cron)
+  specific values for cron:
+    1)MIN - what minute to execute at 
+    2)HOUR - what hour to execute at 
+    3)DOW - what day of the week to execute at 
+    4)DOM - what day of the month to execute at 
+    5)MOY - what month of the year to execute at
+    6)CMD - actual command to execute 
+  example:
+    "crontab 0 12 * * * echo "Its 12AM Good Morning!"
+  P.S. you can use '*' symbol if you dont care about option and also you can open crontab editor by using command crontab -e 
+19. 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 some of the file will have restricted access to check it type ls -l
 
