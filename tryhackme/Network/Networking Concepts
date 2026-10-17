@@ -1,1 +1,35 @@
+OSI (Open Systems Interconnection) model is a model developed by ISO organization that describes how computer should comunicate between each other OSI model contains 7 layers 
 
+7. Application 
+6. Presentation
+5. Session 
+4. Transport
+3. Network 
+2. Data Link
+1. Physical
+
+I have memorized it like : All people seems to need data protection
+
+1) Physical Layer:
+Provides the physical connection between devices through wires or antennas. 
+Data transmission happens via electrical, optical, or wireless signals. At this layer, data is represented as raw bits — 1s and 0s.
+
+2) Data Link Layer:
+Delivers data between devices within the same local network using physical MAC addresses. 
+Bits from the Physical Layer are organized into frames that contain the sender’s and receiver’s MAC addresses, the data, and a checksum for error detection. 
+This layer also controls which device can transmit and when, to avoid collisions.
+
+3) Network Layer:
+Guides the packet through the network and between different networks. It uses IP addresses to decide where the packet goes and chooses the best route (routing) to reach the destination.
+
+4) Transport Layer:
+Decides how data is delivered - reliably with TCP (acknowledged delivery) or fast without guarantees with UDP. Uses ports to direct data to the right application.
+
+5) Session Layer:
+Establish connection, reconection and disconnection between machines
+
+6) Presentation Layer:
+At this layer of OSI model happens encoding(UTF-8), compression and encryption (TLS,SSL) of the packets 
+
+7) Application Layer:
+Layer where the user interacts with web browser buttons and etc.
