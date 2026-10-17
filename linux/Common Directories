@@ -1,6 +1,0 @@
-/etc - system files and configuration
-/var - data created by programs (logs)
-/root - home directory for the root user
-/tmp - temporary storage that will be deleted upon restart
-
-we can monitore logs in /var/log directory 
