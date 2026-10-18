@@ -52,7 +52,7 @@ operators:
   example:
     "crontab 0 12 * * * echo "Its 12AM Good Morning!"
   P.S. you can use '*' symbol if you dont care about option and also you can open crontab editor by using command crontab -e 
-19. 
+19. ifconfig/ ip a s - shows you ip address 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 some of the file will have restricted access to check it type ls -l
 
