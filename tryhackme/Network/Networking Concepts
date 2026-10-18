@@ -33,3 +33,31 @@ At this layer of OSI model happens encoding(UTF-8), compression and encryption (
 
 7) Application Layer:
 Layer where the user interacts with web browser buttons and etc.
+
+TCP/IP model - the only difference in this model is that Application Layer Contains Application, Presentation and Session Layer from OSI model this is why TCP/IP model contains 5 Layers instead of 7 
+
+IP addresses:
+An IP address is a unique identifier that lets devices on a network find each other, much like a home postal address. 
+An IPv4 address consists of four octets separated by dots, such as 192.168.66.89, where each octet is 8 bits with a value from 0 to 255, giving 32 bits in total and roughly 4.3 billion possible addresses. 
+The subnet mask shows which part of the address identifies the network and which identifies the device; for example, 255.255.255.0, also written as /24, means the first three octets are shared across the network, 
+while the last one is unique to each device. 
+In a /24 network, the address ending in .0 is the network address, the one ending in .255 is the broadcast address that reaches all devices, and .1 to .254 are assigned to hosts. 
+You can check your IP with ipconfig on Windows or ip a s and ifconfig on Linux. Public IP addresses are unique across the Internet, while private ones work only inside a local network and can repeat between networks;
+RFC 1918 defines the private ranges as 10.0.0.0/8, 172.16.0.0/12 (172.16 to 172.31), and 192.168.0.0/16. 
+To reach the Internet, devices with private addresses rely on a router with a public IP that uses NAT to translate them. 
+Routers operate at layer 3 of the OSI model, inspecting the destination IP address and forwarding each packet to the next router closer to its destination, so data usually passes through several routers before arriving.
+
+TCP and UDP Protocols:
+IP delivers data to the right computer, while the transport protocols TCP and UDP deliver it to the right process on that computer using port numbers, which range from 1 to 65535 (two octets, with port 0 reserved).
+UDP is connectionless and provides no delivery confirmation: 
+it simply sends data without checking whether it arrived. This makes it fast, so it is used where speed matters more than reliability, such as video calls, online games, and DNS.
+TCP is connection-oriented and ensures reliable delivery. Every byte gets a sequence number, which lets the receiver detect lost or duplicated data, and the receiver confirms what it got with an acknowledgement number. 
+A connection is set up with a three-way handshake: 
+the client sends SYN, the server replies with SYN-ACK, and the client confirms with ACK. TCP is slower but reliable, so it is used for websites, email, file transfers, and SSH.
+
+
+
+
+
+
+
