@@ -1,7 +1,24 @@
 1. pwd - your location
 2. cat - read a file
 3. cd - move through the directories 
-4. find -name "example.txt" - finds file with specified name 
+4. find - finds file with specified name 
+  we can find files by:
+    1) Names:
+      '-name "*.txt"' - is case sensitive 
+      '-iname"README.md"' - ignores case
+    2) Size: 
+      '-size 124c' 
+      suffixes: c(bytes), k(KB), m(MB), g(GB)
+    3) Type:
+      '-type f' also support -b (block), -d (directorie), -l (symbolic link), -c (character)
+    4) Permision:
+      '-perm 644' (4 writing, 2 reading, 1 execute)
+    5) Ownership:
+      '-user Ed' or '-group developers'
+    6) Time:
+      '-mtime -7' - modiffied in last 7 days ago
+      '-atime +30' - accessed over 30 days ago
+      '-ctime 1' - status changed exactly 24–48h ago
 5. grep "password" passwords.txt - finds text inside a file
 6. ls - helps to look up what is inside current folder
 options for ls:
