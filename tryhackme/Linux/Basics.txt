@@ -71,6 +71,8 @@ operators:
     "crontab 0 12 * * * echo "Its 12AM Good Morning!"
   P.S. you can use '*' symbol if you dont care about option and also you can open crontab editor by using command crontab -e 
 19. ifconfig/ ip a s - shows you ip address 
+20. sort - Display sorted concatenation of all file/files
+21. uniq - Report or omit repeated lines.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 some of the file will have restricted access to check it type ls -l
 
