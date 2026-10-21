@@ -19,7 +19,7 @@
       '-mtime -7' - modiffied in last 7 days ago
       '-atime +30' - accessed over 30 days ago
       '-ctime 1' - status changed exactly 24–48h ago
-  P.S. if you will type / after find search will be started from the root 
+  P.S. if you will type / after find it will search from entire pc 
 5. grep "password" passwords.txt - finds text inside a file
 6. ls - helps to look up what is inside current folder
 options for ls:
