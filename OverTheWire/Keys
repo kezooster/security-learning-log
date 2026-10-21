@@ -1,1 +1,32 @@
+bandit0 - 6y2kwnwK6grgvwvpvLaa2T1cpFEKOhNR
+just read README file 
 
+bandit1 - PK8fYLZg2hnHSz83plBL1iEPKdD3QToB 
+our goal is to read file called - since dash is a Special character to do that we have to run command cat ./- 
+
+bandit2 - 7ZZ2LFrykP2zEyvBl4m3clcL7tGYJPME
+our next key is located in a file called --spaces in this filename-- to read this file you have to run command ./"--spaces in this filename--"
+
+bandit3 - xzTXq1rDJQVVAzdv5cHq1TQytTWufAMq
+it says that password is hidden inhere directory so we just use command cd inhere -> ls -la -> cat ...Hidding-From-You
+
+bandit4 - 6C7h9GD8M6ai5nr7wo1RonrzFjj9yIrG
+basicly read all files by using command cat ./-file00 cat ./-file01 cat ./-file02 and etc.
+
+bandit5 - pXa26xhMWaC2SvDotA4r9EgZkulOeSBW
+we need to find a file with size of 1033bytes and not executable to do that we have to run command find -size 1033c ! -executable
+
+bandit6 - Bmnnvf82KzQlfxgAI2d1zYbr1u9pr3E3
+now we need to find file with description below: 33bytes user - bandit7 group -bandit6 but we dont know where the file located to find the password we need to run command find -type f -user bandit7 -group bandit6 -size 33c
+
+bandit7 - VR1ljMayciFxbnUokuQmJFw6QC9VKtub
+for this level we need to find key that is located near word millionth in data.txt file to do that we should use command grep "millionth" data.txt
+
+bandit8 - EjmOSvuAu7sGAHqHVcBDPirRe9T03kxl 
+to find a unique line in data.txt file i have used a command 'sort data.txt | uniq -u'
+
+bandit9 - B0s2khmbT9u0geKuOoVGW3JZKhndE3BG
+to find a key that was located near = i have used command grep --text = data.txt
+
+bandit 10 - pYfOY6HwUsDj5rL9UvyhU7MCmv8vN5Ro
+to decode file data.txt i have used command python3 -m base64 -d $1 data.txt i have used base 64 decode tool that is built in python 
