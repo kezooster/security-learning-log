@@ -70,6 +70,27 @@ The network layer, i.e. the Internet layer, adds an IP header to the received TC
 
 Data link frame: 
 The Ethernet or WiFi receives the IP packet and adds the proper header and trailer, creating a frame.
+-------------------------------------------------------------------------------------------------------
+When ever we want to access the network we need to confiqure 3 things:
+1.IP and subnet mask 
+2.Router(Gateway)
+3.DNS
+
+Inside a local network, an IP packet has to travel inside an Ethernet or Wi-Fi frame. The frame header contains the destination MAC address, the source MAC address, and a Type field (for example IPv4).
+A device usually knows the IP address of the host it wants to reach, because DHCP gives it IP addresses for the router and DNS server, but it doesn’t know that host’s MAC address. ARP (Address Resolution Protocol) solves this.
+
+In the example, the host 192.168.66.89 with MAC cc:5e:f8:02:21:a7 wants to talk to 192.168.66.1. It sends an ARP Request to the broadcast address ff:ff:ff:ff:ff:ff, so every device on the network receives it. 
+The request asks who has 192.168.66.1 and says to tell 192.168.66.89. 
+The owner of that IP sends an ARP Reply directly back, saying that 192.168.66.1 is at 44:df:65:d8:fe:6c. After that, the two hosts can send frames to each other.
+
+The tools show this a little differently. Tshark displays the messages as “Who has... Tell...” and “...is at...”. Tcpdump labels the same packets as “Request who-has” and “Reply is-at”.
+
+ARP is not carried inside IP or UDP. It is placed directly inside an Ethernet frame. People disagree about which layer it belongs to. Some call it Layer 2 because it works with MAC addresses, and others call it Layer 3 because it supports IP. 
+What matters most is that ARP translates Layer 3 addresses (IP) into Layer 2 addresses (MAC).
+
+
+
+
 
 
 
