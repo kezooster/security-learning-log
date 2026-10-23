@@ -88,8 +88,23 @@ The tools show this a little differently. Tshark displays the messages as “Who
 ARP is not carried inside IP or UDP. It is placed directly inside an Ethernet frame. People disagree about which layer it belongs to. Some call it Layer 2 because it works with MAC addresses, and others call it Layer 3 because it supports IP. 
 What matters most is that ARP translates Layer 3 addresses (IP) into Layer 2 addresses (MAC).
 
+ICMP is a network-layer protocol used for diagnostics and error reporting. Ping sends an ICMP Echo Request (type 8) and waits for an Echo Reply (type 0) to check whether a host is reachable and measure round-trip time (RTT). 
+A missing reply may mean the host is down or a firewall blocks ICMP. Traceroute (tracert on Windows) discovers the path to a target by sending packets with increasing TTL values. 
+Each router decrements the TTL, and when it reaches zero the router drops the packet and returns an ICMP Time Exceeded message (type 11),revealing its address. 
+In the output, * * * means a router did not respond, private IPs usually belong to your local network or ISP, and public router names can hint at geographic location. The route may change between runs.
 
+Routing protocols let routers exchange information and build their routing tables automatically. 
+1)OSPF is an open link-state protocol: every router gets a full map of the network and calculates the shortest paths using a cost based on bandwidth. 
+2)EIGRP is a Cisco hybrid protocol whose metric combines bandwidth and delay, and it recovers quickly from failures. 
+3)BGP is the main protocol of the Internet: it connects autonomous systems (ISPs, large networks) and chooses paths mainly by policy. 
+4)RIP is a simple distance-vector protocol that picks the route with the fewest hops (15 at most), so it suits only small networks. 
+OSPF, EIGRP and RIP work inside one network (IGP), while BGP works between networks (EGP).
 
+IPv4 has only about 4.3 billion addresses, which is not enough for all Internet devices. NAT lets many devices with private IP addresses (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16) share one public IP address. 
+Unlike plain routing, a NAT router must track connections, so it keeps a translation table that maps internal IP:port pairs to external IP:port pairs. 
+In the example, the laptop’s connection from 192.168.0.129:15401 appears to the web server as coming from 212.3.4.5:19273, and the router translates replies back. 
+Using ports this way is called PAT (NAT overload). As side effects, unsolicited incoming connections are dropped unless port forwarding is set up, and ISPs may add another layer called CGNAT. 
+IPv6 is the long-term fix for address depletion.
 
 
 
