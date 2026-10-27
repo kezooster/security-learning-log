@@ -77,7 +77,8 @@ When ever we want to access the network we need to confiqure 3 things:
 3.DNS
 
 Inside a local network, an IP packet has to travel inside an Ethernet or Wi-Fi frame. The frame header contains the destination MAC address, the source MAC address, and a Type field (for example IPv4).
-A device usually knows the IP address of the host it wants to reach, because DHCP gives it IP addresses for the router and DNS server, but it doesn’t know that host’s MAC address. ARP (Address Resolution Protocol) solves this.
+A device usually knows the IP address of the host it wants to reach, because DHCP gives it IP addresses for the router and DNS server, but it doesn’t know that host’s MAC address. 
+ARP (Address Resolution Protocol) solves this.
 
 In the example, the host 192.168.66.89 with MAC cc:5e:f8:02:21:a7 wants to talk to 192.168.66.1. It sends an ARP Request to the broadcast address ff:ff:ff:ff:ff:ff, so every device on the network receives it. 
 The request asks who has 192.168.66.1 and says to tell 192.168.66.89. 
@@ -85,10 +86,11 @@ The owner of that IP sends an ARP Reply directly back, saying that 192.168.66.1 
 
 The tools show this a little differently. Tshark displays the messages as “Who has... Tell...” and “...is at...”. Tcpdump labels the same packets as “Request who-has” and “Reply is-at”.
 
-ARP is not carried inside IP or UDP. It is placed directly inside an Ethernet frame. People disagree about which layer it belongs to. Some call it Layer 2 because it works with MAC addresses, and others call it Layer 3 because it supports IP. 
+ARP is not carried inside IP or UDP. It is placed directly inside an Ethernet frame. 
+People disagree about which layer it belongs to. Some call it Layer 2 because it works with MAC addresses, and others call it Layer 3 because it supports IP. 
 What matters most is that ARP translates Layer 3 addresses (IP) into Layer 2 addresses (MAC).
 
-ICMP is a network-layer protocol used for diagnostics and error reporting. Ping sends an ICMP Echo Request (type 8) and waits for an Echo Reply (type 0) to check whether a host is reachable and measure round-trip time (RTT). 
+ICMP is a network-layer protocol used for diagnostics and error reporting. Ping sends an ICMP Echo Request (type 8) and waits for an Echo Reply (type 0) to check whether a host is reachable and measure round-trip time. 
 A missing reply may mean the host is down or a firewall blocks ICMP. Traceroute (tracert on Windows) discovers the path to a target by sending packets with increasing TTL values. 
 Each router decrements the TTL, and when it reaches zero the router drops the packet and returns an ICMP Time Exceeded message (type 11),revealing its address. 
 In the output, * * * means a router did not respond, private IPs usually belong to your local network or ISP, and public router names can hint at geographic location. The route may change between runs.
@@ -105,6 +107,52 @@ Unlike plain routing, a NAT router must track connections, so it keeps a transla
 In the example, the laptop’s connection from 192.168.0.129:15401 appears to the web server as coming from 212.3.4.5:19273, and the router translates replies back. 
 Using ports this way is called PAT (NAT overload). As side effects, unsolicited incoming connections are dropped unless port forwarding is set up, and ISPs may add another layer called CGNAT. 
 IPv6 is the long-term fix for address depletion.
+
+As with browsing the web and downloading files, sending email needs its own protocol. Simple Mail Transfer Protocol (SMTP) defines how a mail client talks with a mail server and how a mail server talks with another.
+
+The analogy for the SMTP protocol is when you go to the local post office to send a package.
+You greet the employee, tell them where you want to send your package, and provide the sender’s information before handing them the package. 
+Depending on the country you are in, you might be asked to show your identity card. This process is not very different from an SMTP session.
+
+Let’s present some of the commands used by your mail client when it transfers an email to an SMTP server:
+
+HELO or EHLO initiates an SMTP session
+MAIL FROM specifies the sender’s email address
+RCPT TO specifies the recipient’s email address
+DATA indicates that the client will begin sending the content of the email message
+. is sent on a line by itself to indicate the end of the email message
+The terminal below shows an example of an email sent via telnet. The SMTP server listens on TCP port 25 by default.
+
+
+Terminal
+user@TryHackMe$ telnet 10.114.165.98 25
+Trying 10.114.165.98...
+Connected to 10.114.165.98.
+Escape character is '^]'.
+220 example.thm ESMTP Exim 4.95 Ubuntu Thu, 27 Jun 2024 16:18:09 +0000
+HELO client.thm
+250 example.thm Hello client.thm [10.11.81.126]
+MAIL FROM: <user@client.thm>
+250 OK
+RCPT TO: <strategos@server.thm>
+250 Accepted
+DATA
+354 Enter message, ending with "." on a line by itself
+From: user@client.thm
+To: strategos@server.thm
+Subject: Telnet email
+
+Hello. I am using telnet to send you an email!
+.
+250 OK id=1sMrpq-0001Ah-UT
+QUIT
+221 example.thm closing connection
+Connection closed by foreign host.
+Obviously, sending an email using telnet is quite cumbersome; however, it helps you better understand the commands that your email client issues under the hood. 
+The Wireshark capture shows the exchange in colours; the client’s messages are in red, while the server’s responses are in blue.
+
+Now that we have covered some basic HTTP, FTP, and SMTP commands, you should have gained a solid understanding of how protocols are designed and used. 
+It should be effortless to learn how other text-based protocols, such as POP3 and IMAP, work.
 
 
 
