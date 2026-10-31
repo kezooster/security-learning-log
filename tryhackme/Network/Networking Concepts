@@ -114,7 +114,26 @@ The analogy for the SMTP protocol is when you go to the local post office to sen
 You greet the employee, tell them where you want to send your package, and provide the sender’s information before handing them the package. 
 Depending on the country you are in, you might be asked to show your identity card. This process is not very different from an SMTP session.
 
+Short summary (EN): Email clients send mail with SMTP and retrieve it with POP3 or IMAP. 
+POP3 (TCP 110) downloads messages to one device and usually deletes them from the server, saving server storage; key commands are:
 
+USER
+PASS
+STAT
+LIST
+RETR
+DELE
+QUIT
+
+IMAP (TCP 143) keeps mail on the server and synchronizes read, moved and deleted messages across multiple devices, using more server storage; key commands are:
+LOGIN
+SELECT
+FETCH
+MOVE
+COPY
+LOGOUT
+
+each prefixed with a tag so the server’s replies can be matched to commands. Both protocols are unencrypted by default, so credentials and messages can be sniffed — POP3S (995) and IMAPS (993) add TLS protection.
 
 
 
