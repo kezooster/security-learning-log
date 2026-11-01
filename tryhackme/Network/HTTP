@@ -1,1 +1,67 @@
+Every time we open a website, the browser and the web server exchange data according to a set of rules. These rules are called HTTP (HyperText Transfer Protocol). 
+The protocol was created by Tim Berners-Lee and his team between 1989 and 1991. HTTP describes how a client requests web page content (HTML, images, videos and so on) from a server and how the server delivers it. 
+HTTP has a secure version, HTTPS, in which data is encrypted. 
+Encryption solves two problems: outsiders cannot read what we send and receive, and we can be sure we are talking to the real server and not to someone impersonating it.
+
+Before requesting anything, the browser needs to know where to go and how to get there. 
+This is what a URL (Uniform Resource Locator) is for: essentially an instruction for accessing a resource. 
+A URL consists of several parts, although not all of them are used in every request. The scheme specifies the protocol: HTTP, HTTPS, FTP. 
+The user part lets you pass a username and password if the service requires authentication. The host is the domain name or IP address of the server. 
+The port defines which port to connect to: usually 80 for HTTP and 443 for HTTPS, but any port from 1 to 65535 is allowed. The path points to the file or resource. 
+The query string passes extra parameter for example:
+/blog?id=1 requests the article with ID 1. 
+Finally, the fragment refers to a specific location on the page, so the user immediately sees the right section of a long text.
+
+The request itself can be very simple. Technically, one line is enough: GET / HTTP/1.1. In practice, the browser adds headers containing additional information:
+
+http
+GET / HTTP/1.1
+Host: tryhackme.com
+User-Agent: Mozilla/5.0 Firefox/87.0
+Referer: https://tryhackme.com/
+
+The first line specifies the GET method, the requested home page / and protocol version 1.1. The following lines tell the server which website is wanted, which browser the client is using and which page referred them. 
+A request always ends with a blank line, which tells the server that the request is complete.
+
+The server’s response is structured similarly. The first line contains the protocol version and a status code, such as 200 OK. 
+Then come the headers: the server software (Server: nginx/1.15.8), the date and time, the content type (Content-Type) and its size (Content-Length), which lets the client confirm that no data is missing. 
+After a blank line comes the content itself, for example the page’s HTML code.
+
+The client expresses its intention through HTTP methods. Four are used most often: GET to retrieve information, POST to submit data and create new records, PUT to update existing data and DELETE to remove it. 
+In everyday work, GET and POST are by far the most common.
+
+The server reports the outcome of a request with a status code. Codes fall into five ranges: 
+100–199 informational (rarely seen today)
+200–299 success
+300–399 redirection
+400–499 client errors 
+500–599 server errors which usually indicate a serious problem. 
+
+The most common codes are:
+
+200 OK: the request succeeded; 201 Created: a new resource was created, such as a user or a post.
+301 Moved Permanently: the page has moved for good; 302 Found: a temporary redirect.
+400 Bad Request: something in the request is wrong or missing, such as a required parameter.
+401 Not Authorised: you need to log in; 403 Forbidden: no access at all, even after logging in.
+404 Not Found: the resource does not exist; 405 Method Not Allowed: the wrong method was used, for example GET instead of the expected POST.
+500 Internal Server Error: the server could not process the request; 503 Service Unavailable: the server is overloaded or down for maintenance.
+
+Headers deserve a closer look. Formally, none of them is required, but without them a website is hard to display properly. The most important client request headers are: 
+Host (one server may host several websites, and this header names the one you want; otherwise you get the default site)
+User-Agent (the browser and its version, so the server can format the page correctly)
+Content-Length (how much data is being sent, for example from a form)
+Accept-Encoding (the compression methods the browser supports) 
+Cookie 
+
+In response  the server sends 
+
+Set-Cookie (data the browser will send back with every request)
+Cache-Control (how long to keep the response in the cache)
+Content-Type (the data type, which tells the browser how to process it) 
+Content-Encoding (how the data was compressed).
+
+Finally, cookies. These are small pieces of data stored on the user’s computer after receiving a Set-Cookie header and then sent back to the server with every new request. 
+They are needed because HTTP is stateless: the server does not remember previous requests. Cookies remind it who we are, what our settings are and whether we have visited the site before. 
+They are most commonly used for authentication, and a cookie usually holds not a plaintext password but a token, a unique secret code that is hard to guess. 
+You can view your cookies in the browser’s developer tools: open the Network tab, select the request and open the Cookies tab.
 
