@@ -114,7 +114,7 @@ The analogy for the SMTP protocol is when you go to the local post office to sen
 You greet the employee, tell them where you want to send your package, and provide the sender’s information before handing them the package. 
 Depending on the country you are in, you might be asked to show your identity card. This process is not very different from an SMTP session.
 
-Short summary (EN): Email clients send mail with SMTP and retrieve it with POP3 or IMAP. 
+Short summary: Email clients send mail with SMTP and retrieve it with POP3 or IMAP. 
 POP3 (TCP 110) downloads messages to one device and usually deletes them from the server, saving server storage; key commands are:
 
 USER
