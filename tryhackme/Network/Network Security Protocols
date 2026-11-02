@@ -1,0 +1,27 @@
+Securing the Web and File Transfers: HTTPS and FTPS
+
+Every network protocol is built around two basic ideas. First, each protocol belongs to specific layers of the OSI or TCP/IP model and behaves according to the functions of those layers. 
+Second, protocols based on TCP or UDP operate on specific network ports. With these ideas in mind, two widely used secure protocols can be examined: HTTPS for web traffic and FTPS for file transfers. 
+Both share the same core principle: they take an older, unencrypted protocol and add a layer of encryption to protect the data.
+
+HTTPS, or Hypertext Transfer Protocol Secure, is a client-server protocol that securely carries data between a web browser and a website. 
+It is the encrypted version of HTTP, which sends everything in cleartext over TCP port 80. In HTTP, a user agent, such as a browser or an application using an API, sends requests to a web server. 
+A GET request asks for a resource like a page, an image or a file, while POST and PUT send data to the server. The problem is that anyone who captures the packets between client and server can read their contents. 
+For simply reading about a company's products this may be acceptable, but for entering a password or credit card number it is not. HTTPS solves this by adding SSL/TLS on top of HTTP and using port 443 by default. 
+TLS combines two types of encryption: asymmetric encryption, which uses a public and a private key, is used to negotiate a symmetric algorithm and a shared secret key, and symmetric encryption then protects the actual traffic. 
+As a result, an attacker who intercepts the packets cannot read or alter them, which preserves both confidentiality and integrity. Without HTTPS, online banking and online payments would not be possible.
+
+FTP, the File Transfer Protocol, is much older, dating back to 1971 and RFC 114, and was later refined in RFC 765 and RFC 959.
+It also follows the client-server model and authenticates users with a username and password, but both the login and the files travel unencrypted. 
+FTP uses two separate channels: a control connection on TCP port 21 for commands and authentication, and a data connection for transferring files and folders. 
+It can work in two modes. In active mode, the client opens the control connection, and then the server connects back to the client from port 20 to send data. 
+This fails when the client is behind a firewall that blocks incoming connections. 
+In passive mode, the client sends the PASV command, the server replies with a random port, and the client opens the data connection itself, which works well behind firewalls. 
+FTP also supports several data types: ASCII (Type A) for text, Image (Type I) for binary byte-by-byte transfer, EBCDIC (Type E) for that character set, and Local Type L n for systems without 8-bit bytes.
+
+FTPS extends FTP by adding TLS to both the command and data channels. It can be used in two ways. In implicit FTPS, the connection is encrypted automatically from the start and uses port 990. 
+In explicit FTPS, the client connects on port 21 and explicitly asks the server to start a TLS session; the client can then choose to encrypt only the control channel, only the data channel, or both. 
+In either case, FTPS protects login credentials and transferred files from sniffing attacks.
+
+In conclusion, HTTPS and FTPS show how security is often added to existing protocols rather than built from scratch. 
+By wrapping HTTP and FTP in TLS and moving them to their own ports, they keep the original workflow intact while protecting the confidentiality and integrity of the data, which is essential for modern online services.
