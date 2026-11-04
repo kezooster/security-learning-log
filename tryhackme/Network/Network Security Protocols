@@ -25,3 +25,52 @@ In either case, FTPS protects login credentials and transferred files from sniff
 
 In conclusion, HTTPS and FTPS show how security is often added to existing protocols rather than built from scratch. 
 By wrapping HTTP and FTP in TLS and moving them to their own ports, they keep the original workflow intact while protecting the confidentiality and integrity of the data, which is essential for modern online services.
+
+Secure Application-Layer Protocols: DNSSEC, OpenPGP, SSH, SMTPS and POP3S
+
+The Domain Name System (DNS) translates human-friendly domain names into IP addresses. For example, example.com resolved to 93.184.216.34, which is much harder to remember than the name. 
+A client sends DNS queries for specific record types: an A record for an IPv4 address and an AAAA record for an IPv6 address. 
+A tshark capture on port 53 shows host 192.168.0.102 sending A and AAAA queries for example.com to the DNS server 1.0.0.1 and receiving the IPv4 address 93.184.216.34 and the IPv6 address 2606:2800:220:1:248:1893:25c8:1946. 
+The weakness is that anyone on the network could send a forged answer, and the host would accept any response and could connect to a rogue server. 
+DNSSEC addresses this. The zone owner signs all DNS records with a private key and publishes a public key so clients can verify the signatures. This gives two guarantees. 
+Authenticity means the record really comes from the domain owner. Integrity means the record was not changed in transit, because any change makes the signature invalid.
+
+Email was designed in a different era. 
+The first email was sent in 1971, and SMTP (sending), POP3 (downloading) and IMAP (mailbox synchronization) all work in cleartext, like a postcard anyone can read as it passes between servers. 
+Webmail first ran over HTTP, which had the same confidentiality and integrity problems. It later moved to HTTPS, which encrypted the link between the browser and the web server. 
+However, traffic between the web server and the mail servers was not necessarily encrypted, and servers could still read messages. 
+SSL/TLS was then added to the mail protocols, producing SMTPS, POP3S and IMAPS, where the “S” means secure. Even so, mail servers along the way can still read message contents, so users must trust them.
+
+For end-to-end protection, the answer is OpenPGP. PGP (Pretty Good Privacy) was created by Phil Zimmermann. OpenPGP is the open standard for signing and encrypting files and email, defined in RFC 4880. 
+GnuPG (GPG) is a free, open-source implementation of it that integrates with mail clients. Each user generates a key pair with gpg --gen-key, which asks for a name and email address. 
+The private key is kept secret, and the public key is shared. The sender signs with their own private key and encrypts with the recipient’s public key. 
+The recipient verifies the signature with the sender’s public key and decrypts with their own private key. As a result, nobody except the recipient, not even the mail servers, can read the content. 
+Email headers are not protected, though. On the command line, a message is encrypted with gpg --encrypt --sign --armor -r strategos@tryhackme.thm message.txt:
+
+--encrypt -r encrypts with the recipient’s public key, which provides confidentiality.
+--sign signs with the sender’s private key, which provides authenticity.
+--armor produces ASCII output instead of binary.
+
+The result is a -----BEGIN PGP MESSAGE----- block that can be sent in any email.
+
+Remote administration followed a similar path. Telnet and rlogin let users log in over a network, but they protected neither confidentiality nor integrity. 
+An attacker monitoring the network could read credentials and even modify commands. Running Wireshark’s “Follow TCP Stream” on a Telnet session reveals the username michael and the password RJ9wn^t3T%gC in plain text. 
+The password is strong, but it is useless when sent like that. SSH fixed this. 
+In a captured SSH session, only the version numbers and the supported algorithms are visible, and no usernames, passwords or commands can be seen.
+
+SMTPS is SMTP wrapped in TLS. It provides authentication, integrity and confidentiality. SMTP is an “email push protocol” that moves mail from a client to a server. 
+POP3, in contrast, downloads mail from the server to the client. SMTP works in two models. End-to-end is used between organizations: the sender’s SMTP client connects directly to the recipient’s SMTP server. 
+Store-and-forward is used within an organization: the server keeps a copy of the message until it forwards it. 
+The key components are the User Agent (UA), which creates the message and passes it to the Mail Transfer Agent (MTA), which carries it across the Internet to the recipient’s MTA. 
+The MTA and the Mail Delivery Agent (MDA) are often on the same server. Encryption is switched on with the STARTTLS command. SMTPS commonly uses ports 587 and 465. 
+It protects against sniffing, and the source also claims it hinders spam from compromised domains, data exfiltration and phishing.
+
+POP3S is the secure version of POP3. POP3 retrieves mail from the MDA to the MUA (Mail User Agent) as follows:
+
+The client connects to the server.
+It downloads all queued messages (or only selected ones).
+The messages are stored on the device that connected.
+By default, the server deletes its copy.
+
+POP3 has two main limitations. There is no synchronization across devices, and credentials and messages travel in cleartext, which makes them vulnerable to sniffing. 
+POP3S wraps the session in TLS, switched on via STARTTLS. POP3S uses port 995, while POP3 uses port 110.
