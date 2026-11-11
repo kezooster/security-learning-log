@@ -135,6 +135,18 @@ LOGOUT
 
 each prefixed with a tag so the server’s replies can be matched to commands. Both protocols are unencrypted by default, so credentials and messages can be sniffed — POP3S (995) and IMAPS (993) add TLS protection.
 
+Secure Remote Access: SSH, SFTP, FTPS and VPN
+
+Remote access and file transfer must be secure, because older protocols such as TELNET and FTP send everything, including passwords, in cleartext that anyone sniffing traffic can read.
+To fix this, Tatu Ylönen created SSH in 1995, SSH-2 followed in 1996, and in 1999 OpenBSD developers released OpenSSH, the open-source base of almost every SSH client used today.
+SSH listens on port 22 instead of TELNET's port 23 and offers password, public-key and two-factor login, end-to-end encryption, integrity protection and warnings about new server keys.
+It can also tunnel other protocols and forward X11 graphics: a user connects with ssh username@hostname, and the -X option lets GUI programs like Wireshark run from a remote system.
+For files there is SFTP, the SSH File Transfer Protocol. It is part of the SSH suite, uses port 22 and is enabled in OpenSSH; after sftp username@hostname, get and put move files.
+SFTP must not be confused with FTPS, which is FTP secured by TLS like HTTPS, usually on port 990. It needs a certificate and is hard to pass through firewalls due to separate connections.
+A VPN applies the same idea to whole networks: over the Internet, a company can link remote branches and users to its main office through an encrypted tunnel, cheaply and privately.
+TCP/IP guarantees delivery but not secrecy, so the VPN client encrypts traffic. Websites see the VPN server's IP, which helps bypass geo-restrictions, and the ISP sees only encrypted data.
+However, not every VPN routes all traffic, some leak the real IP or DNS requests, and VPNs are illegal in some countries, so users should run leak tests and check local laws first.
+In conclusion, SSH, SFTP, FTPS and VPNs all replace cleartext communication with encryption, making remote administration, file transfer and network access far safer than before.
 
 
 
