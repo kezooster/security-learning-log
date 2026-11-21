@@ -21,7 +21,9 @@ The password for the next level is stored in a file called --spaces in this file
 2. Then used `cat ./'--spaces in this filename--'` to get the password. You can also use `cat -- '--spaces in this filename--'`
 
 Mistake: I tried `cat '--spaces in this filename--'` and it didn't work. When cat reads the filename, it sees `--` and expects an option, but there is no such option, so it gives an error.
+
 Fix 1: `cat ./'--spaces in this filename--'` works because the argument starts with a dot
+
 Fix 2: `cat -- '--spaces in this filename--'` works because `--` marks the end of options, so the command runs properly
 
 ## Level 3 -> 4
